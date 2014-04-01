@@ -16,7 +16,7 @@
 
         _m_barPies = [NSMutableArray array];
         [_m_barPies retain];
-        back = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"ground"]];
+        back = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"ground.png"]];
         back.position = ccp(0, 0);
         back.scaleX = 2.0;
         

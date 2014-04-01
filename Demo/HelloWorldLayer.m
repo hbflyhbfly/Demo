@@ -43,7 +43,6 @@
 	}
     [self scheduleUpdate];
     [self setTouchEnabled:YES];
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Res.plist"];
     //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"shoot_background.plist"];
 	return self;
 }
@@ -77,8 +76,6 @@
 {
 	[super dealloc];
 }
-
-
 
 #pragma mark GameKit delegate
 

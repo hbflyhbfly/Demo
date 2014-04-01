@@ -18,8 +18,8 @@
         speed = 0;
         grivate = GRIVATE;
         constSpeed = 10;
-        _runner = [CCSprite spriteWithFile:@"runer.png"];
-        _runner.position = ccp(100, -25);
+        _runner = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"loading_01.png"]];
+        _runner.position = ccp(100, 25);
         _runner.anchorPoint = ccp(0, 0);
         _runner.scale = 0.5;
         NSMutableArray *animFrames = [NSMutableArray array];

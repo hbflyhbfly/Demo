@@ -12,6 +12,7 @@
 @interface BackGroundLayer : CCLayer {
     CCSprite *barPipe;
     CCSprite *back;
+    
 
 }
 @property (assign)NSMutableArray* m_barPies;

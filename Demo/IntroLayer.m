@@ -38,6 +38,8 @@
 {
 	if( (self=[super init])) {
 
+        [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"Res.plist"];
+
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
 
