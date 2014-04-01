@@ -145,6 +145,8 @@
 		CD6EAE0D18E94C9000C887A4 /* RunerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6EAE0C18E94C9000C887A4 /* RunerLayer.m */; };
 		CDA2669318E97F740077E371 /* Res.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDA2669118E97F740077E371 /* Res.plist */; };
 		CDA2669418E97F740077E371 /* Res.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA2669218E97F740077E371 /* Res.png */; };
+		CDD8D2BB18EA94E3009B087D /* CollisionLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD8D2BA18EA94E3009B087D /* CollisionLayer.m */; };
+		CDD8D2BF18EAC897009B087D /* RectUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDD8D2BD18EAC897009B087D /* RectUtil.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -435,6 +437,11 @@
 		CD6EAE0C18E94C9000C887A4 /* RunerLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunerLayer.m; sourceTree = "<group>"; };
 		CDA2669118E97F740077E371 /* Res.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Res.plist; sourceTree = "<group>"; };
 		CDA2669218E97F740077E371 /* Res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Res.png; sourceTree = "<group>"; };
+		CDD8D2B718EA927D009B087D /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		CDD8D2B918EA94E3009B087D /* CollisionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollisionLayer.h; sourceTree = "<group>"; };
+		CDD8D2BA18EA94E3009B087D /* CollisionLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollisionLayer.m; sourceTree = "<group>"; };
+		CDD8D2BD18EAC897009B087D /* RectUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectUtil.cpp; sourceTree = "<group>"; };
+		CDD8D2BE18EAC897009B087D /* RectUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectUtil.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -495,6 +502,7 @@
 		CD6EAC4918E93DEA00C887A4 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				CDD8D2BC18EAC7DF009B087D /* Utils */,
 				CD6EADDA18E93DEC00C887A4 /* AppDelegate.h */,
 				CD6EADDB18E93DEC00C887A4 /* AppDelegate.m */,
 				CD6EADDD18E93DEC00C887A4 /* HelloWorldLayer.h */,
@@ -508,6 +516,9 @@
 				CD6EADEC18E93E7C00C887A4 /* BackGroundLayer.m */,
 				CD6EAE0B18E94C9000C887A4 /* RunerLayer.h */,
 				CD6EAE0C18E94C9000C887A4 /* RunerLayer.m */,
+				CDD8D2B718EA927D009B087D /* Header.h */,
+				CDD8D2B918EA94E3009B087D /* CollisionLayer.h */,
+				CDD8D2BA18EA94E3009B087D /* CollisionLayer.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -895,6 +906,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CDD8D2BC18EAC7DF009B087D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CDD8D2BD18EAC897009B087D /* RectUtil.cpp */,
+				CDD8D2BE18EAC897009B087D /* RectUtil.h */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1027,6 +1047,7 @@
 				CD6EAC8418E93DEB00C887A4 /* CCActionProgressTimer.m in Sources */,
 				CD6EAC6618E93DEA00C887A4 /* CCAction.m in Sources */,
 				CD6EAD9E18E93DEC00C887A4 /* CocosDenshion.m in Sources */,
+				CDD8D2BF18EAC897009B087D /* RectUtil.cpp in Sources */,
 				CD6EAD2318E93DEB00C887A4 /* CCTextureCache.m in Sources */,
 				CD6EADC618E93DEC00C887A4 /* neon_matrix_impl.c in Sources */,
 				CD6EACF618E93DEB00C887A4 /* CCScene.m in Sources */,
@@ -1051,6 +1072,7 @@
 				CD6EAD3E18E93DEC00C887A4 /* CCTransitionProgress.m in Sources */,
 				CD6EAD6118E93DEC00C887A4 /* CCGLView.m in Sources */,
 				CD6EAD9518E93DEC00C887A4 /* CDOpenALSupport.m in Sources */,
+				CDD8D2BB18EA94E3009B087D /* CollisionLayer.m in Sources */,
 				CD6EAC7818E93DEB00C887A4 /* CCActionInstant.m in Sources */,
 				CD6EAC9918E93DEB00C887A4 /* CCClippingNode.m in Sources */,
 				CD6EAD1D18E93DEB00C887A4 /* CCTexture2D.m in Sources */,

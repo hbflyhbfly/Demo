@@ -9,13 +9,12 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
-
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
-
 #pragma mark - HelloWorldLayer
 
 // HelloWorldLayer implementation
+
 @implementation HelloWorldLayer
 
 // Helper class method that creates a Scene with the HelloWorldLayer as the only child.
@@ -34,16 +33,19 @@
 {
 
 	if( (self=[super init]) ) {
-		
+		//背景
         backGroundLayer = [BackGroundLayer node];
 		[self addChild:backGroundLayer];
+        //女娃
         runerLayer = [RunerLayer node];
         [self addChild:runerLayer];
+        //障碍物
+        collisionLayer = [CollisionLayer node];
+        [self addChild:collisionLayer];
 
 	}
     [self scheduleUpdate];
     [self setTouchEnabled:YES];
-    //[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"shoot_background.plist"];
 	return self;
 }
 
@@ -53,22 +55,25 @@
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event{
-    [runerLayer setRunerStatu:JUMP_UP];
-    [runerLayer jump];
+    if (![runerLayer isJump]) {
+        [runerLayer setRunerStatu:JUMP_UP];
+    }
     return true;
 }
 
 -(void)update:(ccTime)delta{
-    [self updateCollisions];
+    [backGroundLayer updateGround:delta];
+    [runerLayer updateRuner:delta];
+    [collisionLayer updateCollisions:delta];
+    [self checkCollision];
+    
 }
 
--(void)updateCollisions{
-    for (int i = 0;i<backGroundLayer.m_barPies.count;i++) {
-        CCSprite* collisionBar = [backGroundLayer.m_barPies objectAtIndex:i];
-        //collisionBar.boundingBox
-        if (CGRectIntersectsRect(collisionBar.boundingBox, runerLayer.runner.boundingBox)) {
-            NSLog(@"碰撞了");
-        }
+-(void)checkCollision{
+    for (CCSprite* collision in collisionLayer._m_barPies) {
+        CGRect bigCollRect = collision.boundingBox;
+        CGRect collRect = CGRectMake(bigCollRect.origin.x, 300-bigCollRect.size.height, bigCollRect.size.width, 300);
+        [runerLayer isCollision:bigCollRect];
     }
 }
 

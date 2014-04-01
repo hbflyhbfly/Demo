@@ -10,13 +10,9 @@
 #import "cocos2d.h"
 
 @interface BackGroundLayer : CCLayer {
-    CCSprite *barPipe;
-    CCSprite *back;
     
-
 }
-@property (assign)NSMutableArray* m_barPies;
--(void)moveBack:(float)dt;
--(void)removeBarPie:(CCSprite*)barPie;
--(void)setRandomY:(CCSprite*)barPie;
+@property (assign)NSMutableArray* _m_grounds;
+-(void)initGround;
+-(void)updateGround:(float)dt;
 @end

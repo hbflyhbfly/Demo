@@ -9,29 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Demo/RunerLayer.m"
-            timestampString = "417956126.004984"
+            filePath = "Demo/HelloWorldLayer.m"
+            timestampString = "418043182.34691"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "-roleJumpDownLogic"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "-ccTouchBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Demo/HelloWorldLayer.m"
-            timestampString = "418011525.775318"
+            timestampString = "418045063.445476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "-updateCollisions"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-checkCollision"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
