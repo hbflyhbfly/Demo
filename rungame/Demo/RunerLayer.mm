@@ -8,25 +8,21 @@
 
 #import "RunerLayer.h"
 #import "Header.h"
+#include <Box2D.h>
+
 const float CONST_SPEED_Y = 9;
 
 @implementation RunerLayer
 
--(id) init
-{
-	if( (self=[super init])) {
+-(id)initRunerWith:(b2World*)world{
+    if( (self=[super init])) {
         
         self.zOrder = ZORDER_RUNER;
         _speedY = 0;
         _grivate = GRIVATE;
-        [self initRuner];
         _groundHeigh = BACK_GROUND_HEIGH;
-        
-    }
-	return self;
-}
-
--(void)initRuner{
+        _world = world;
+    
     __runner = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"loading_01.png"]];
     __runner.position = ccp(100, _groundHeigh);
     __runner.anchorPoint = ccp(0, 0);
@@ -42,10 +38,49 @@ const float CONST_SPEED_Y = 9;
     CCAnimation *animation = [CCAnimation animationWithSpriteFrames:animFrames delay:0.04];          // 添加帧到数组
     CCAnimate* animate = [CCAnimate actionWithAnimation:animation];
     [__runner runAction:[CCRepeatForever actionWithAction:animate]];
-    [self addChild:__runner];
+        [self addChild:__runner];
+    //物理体
+        b2BodyDef ballBodyDef;
+        ballBodyDef.type = b2_staticBody;
+        ballBodyDef.position.Set(__runner.position.x/PTM_RATIO, __runner.position.y/PTM_RATIO);
+        ballBodyDef.userData = __runner;
+        _runer_body = world->CreateBody(&ballBodyDef);
+        
+        b2CircleShape circle;
+        circle.m_radius =26.0/PTM_RATIO;
+        
+        b2FixtureDef ballShapeDef;
+        ballShapeDef.shape =&circle;
+        ballShapeDef.density =1.0f;
+        ballShapeDef.friction =0.2f;
+        ballShapeDef.restitution =0.8f;
+        ballShapeDef.isSensor =true;
+        _runer_body->CreateFixture(&ballShapeDef);
+    }
+    return self;
+}
+
+- (void)tick:(ccTime) dt {
+    
+    _world->Step(dt, 10, 10);
+    for(b2Body *b = _world->GetBodyList(); b; b=b->GetNext()) {
+        if (b->GetUserData() != NULL) {
+            CCSprite *ballData = (CCSprite *)b->GetUserData();
+//            ballData.position = ccp(b->GetPosition().x * PTM_RATIO,
+//                                    b->GetPosition().y * PTM_RATIO);
+//            ballData.rotation =-1* CC_RADIANS_TO_DEGREES(b->GetAngle());
+            b2Vec2 b2Position = b2Vec2(ballData.position.x/PTM_RATIO,
+                                       ballData.position.y/PTM_RATIO);
+            float32 b2Angle =-1* CC_DEGREES_TO_RADIANS(ballData.rotation);
+            
+            b->SetTransform(b2Position, b2Angle);
+        }
+    }
+    
 }
 
 -(void)updateRuner:(float)dt{
+    [self tick:dt];
     switch (_runerStatu) {
             case JUMP_UP: {
                 
@@ -115,24 +150,6 @@ const float CONST_SPEED_Y = 9;
     }
 }
 
--(void)roleNormalLogic{
-    float roleY = __runner.position.y;
-    roleY += [self getSpeedY];
-    [__runner setPosition:ccp(__runner.position.x, roleY)];
-    [self setSpeedY:[self getSpeedY]- _grivate];
-    if (roleY <= _groundHeigh) {
-        [__runner setPosition:ccp(__runner.position.x, _groundHeigh)];
-        [self setRunerStatu:NORMAL];
-        //_groundHeigh = BACK_GROUND_HEIGH;
-        return;
-    }
-
-}
-
--(void)toGround{
-    
-}
-
 -(BOOL)isCollision:(CGRect)coll{
     BOOL bRet = NO;
     CGRect runerRect = __runner.boundingBox;
@@ -159,14 +176,12 @@ const float CONST_SPEED_Y = 9;
     //bottom
     if (CGRectContainsPoint(coll, ccpAdd(location, ccp(runerRect.size.width/2, 0)))) {
         collArea = COLL_STATE_BOTTOM;
-        _groundHeigh = location.y;
-        [self setRunerStatu:NORMAL];
-        bRet = NO;
+        bRet = YES;
         NSLog(@"bottom");
     }
-    //if (collArea) {
-    //    [self fixCollision:collArea withLocation:location];
-    //}
+    if (collArea) {
+        [self fixCollision:collArea withLocation:location];
+    }
     return bRet;
     
 }
@@ -180,10 +195,10 @@ const float CONST_SPEED_Y = 9;
             [__runner setPosition:ccpAdd(location, ccp(-1, 0))];
             break;
         case COLL_STATE_UP:
-            [__runner setPosition:ccpAdd(location, ccp(0, 1))];
+            [__runner setPosition:ccpAdd(location, ccp(0, -1))];
             break;
         case COLL_STATE_BOTTOM:
-            //[__runner setPosition:ccpAdd(location, ccp(0, -1))];
+            [__runner setPosition:ccpAdd(location, ccp(0, 1))];
             
             break;
             
@@ -204,5 +219,13 @@ const float CONST_SPEED_Y = 9;
 }
 -(BOOL)isJump{
     return (!([self getRunerStatu] == NORMAL));
+}
+
+
+-(void)dealloc{
+    delete _world;
+    _runer_body = NULL;
+    _world = NULL;
+    [super dealloc];
 }
 @end

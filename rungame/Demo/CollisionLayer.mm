@@ -8,7 +8,7 @@
 
 #import "CollisionLayer.h"
 #import "Header.h"
-
+#define COLLISION_BARPIE_TAG 0
 @implementation CollisionLayer
 
 -(id) init
@@ -30,7 +30,7 @@
         CCSprite* barPipe = [CCSprite spriteWithSpriteFrame:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:@"down_bar.png"]];
         [barPipe setPosition:ccp(winSize.width+INTERVAL_COLLISION*i, 330 - HEITH_COLLISION)];
         [__m_barPies addObject:barPipe];
-        [self addChild:barPipe];
+        [self addChild:barPipe z:0 tag:COLLISION_BARPIE_TAG];
         
     }
 }

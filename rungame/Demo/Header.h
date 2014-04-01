@@ -18,5 +18,7 @@
 #define ZORDER_COLLISION 1
 #define ZORDER_RUNER 3
 
+#define PTM_RATIO 32.0
+
 
 #endif

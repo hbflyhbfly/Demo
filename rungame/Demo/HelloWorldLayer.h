@@ -12,14 +12,15 @@
 #import "RunerLayer.h"
 #import "CollisionLayer.h"
 #import "RunerLayer.h"
-// When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
+#include <Box2D.h>
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
 {
     BackGroundLayer* backGroundLayer;
     CollisionLayer* collisionLayer;
     RunerLayer* runerLayer;
+    b2World *_world;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child

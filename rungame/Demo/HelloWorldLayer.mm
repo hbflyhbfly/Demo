@@ -33,17 +33,22 @@
 {
 
 	if( (self=[super init]) ) {
+        //物理世界
+        b2Vec2 gravity = b2Vec2(0.0f, -30.0f);
+        _world = new b2World(gravity);
 		//背景
         backGroundLayer = [BackGroundLayer node];
 		[self addChild:backGroundLayer];
         //女娃
-        runerLayer = [RunerLayer node];
+        runerLayer = [[RunerLayer alloc]initRunerWith:_world];
         [self addChild:runerLayer];
         //障碍物
         collisionLayer = [CollisionLayer node];
         [self addChild:collisionLayer];
 
 	}
+    
+    
     [self scheduleUpdate];
     [self setTouchEnabled:YES];
 	return self;
@@ -65,15 +70,19 @@
     [backGroundLayer updateGround:delta];
     [runerLayer updateRuner:delta];
     [collisionLayer updateCollisions:delta];
-    [self checkCollision];
+   // [self checkCollision];
     
 }
 
 -(void)checkCollision{
     for (CCSprite* collision in collisionLayer._m_barPies) {
         CGRect bigCollRect = collision.boundingBox;
-        CGRect collRect = CGRectMake(bigCollRect.origin.x, 300-bigCollRect.size.height, bigCollRect.size.width, 300);
+        //CGRect collRect = CGRectMake(bigCollRect.origin.x, 300-bigCollRect.size.height, bigCollRect.size.width, 300);
         [runerLayer isCollision:bigCollRect];
+    }
+    for (CCSprite* ground in backGroundLayer._m_grounds) {
+        CGRect groundRect = ground.boundingBox;
+        [runerLayer isCollision:groundRect];
     }
 }
 
