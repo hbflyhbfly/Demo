@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#include <Box2D.h>
 typedef enum{
     NORMAL,
     JUMP_UP,
@@ -25,11 +24,10 @@ typedef enum{
     float _speedY;
     RUNER_STATU _runerStatu;
     float _groundHeigh;
-    b2Body *_runer_body;
-    b2World *_world;
+
 }
 @property (assign) CCSprite* _runner;
--(id)initRunerWith:(b2World*)world;
+
 -(void)updateRuner:(float)dt;
 -(void)setRunerStatu:(RUNER_STATU)statu;
 -(RUNER_STATU)getRunerStatu;
@@ -38,7 +36,6 @@ typedef enum{
 -(void)roleJumpDownLogic;
 -(void)roleJumpUpLogic;
 -(BOOL)isJump;
--(BOOL)isCollision:(CGRect)coll;
+-(BOOL)isCollision:(CCSprite*)coll;
 -(void)fixCollision:(COLL_AREA)collisionArea withLocation:(CGPoint)location;
-- (void)tick:(ccTime) dt;
 @end
